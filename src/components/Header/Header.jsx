@@ -41,11 +41,6 @@ const Header = () => {
           onClick={toggleMobileMenu}
           aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
           aria-expanded={isMobileMenuOpen}
-          style={{
-            display: 'flex',
-            position: 'relative',
-            zIndex: 1003
-          }}
         >
           <span className={styles.hamburgerLine}></span>
           <span className={styles.hamburgerLine}></span>

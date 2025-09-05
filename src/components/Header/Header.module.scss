@@ -481,7 +481,41 @@
   }
 }
 
-@media (max-width: $breakpoint-md) {
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-md;
+  }
+
+  // Keep desktop navigation visible on tablets
+  .navigation {
+    display: block;
+    
+    .navList {
+      gap: $spacing-sm;
+      
+      li a {
+        font-size: $font-size-xs;
+        padding: $spacing-xs $spacing-sm;
+      }
+    }
+  }
+
+  // Hide hamburger menu on tablets (1024px and below)
+  .hamburger {
+    display: none !important;
+  }
+  
+  .logo {
+    .logoImage {
+      height: 45px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
   .container {
     flex-direction: row;
     justify-content: space-between;
@@ -494,7 +528,7 @@
     display: none;
   }
 
-  // Show hamburger menu on mobile
+  // Show hamburger menu only on mobile (768px and below)
   .hamburger {
     display: flex !important;
     background: rgba(255, 255, 255, 0.2) !important;

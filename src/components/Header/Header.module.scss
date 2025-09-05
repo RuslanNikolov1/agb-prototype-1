@@ -1,0 +1,441 @@
+@import '../../styles/variables.scss';
+
+.header {
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0.5%, rgba(2, 27, 96, 0.9) 100%);
+  filter:alpha(opacity=50);
+  opacity: 0.9;
+  color: white;
+  padding: 1rem 0;
+  position: relative;
+  z-index: 1000;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 $spacing-xl;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  
+  .logoImage {
+    height: 55px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    transition: all $transition-normal;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+    opacity: 1;
+    
+    &:hover {
+      transform: scale(1.08) rotate(1deg);
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    }
+  }
+}
+
+.navigation {
+  margin-left: 0;
+  
+  .navList {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: $spacing-sm;
+    align-items: center;
+
+    li {
+      position: relative;
+      
+      a {
+        color: white;
+        text-decoration: none;
+        font-weight: $font-weight-medium;
+        font-size: $font-size-sm;
+        line-height: 1.4;
+        transition: all $transition-normal;
+        padding: $spacing-sm $spacing-md;
+        border-radius: $border-radius-md;
+        text-align: center;
+        display: block;
+        white-space: nowrap;
+        position: relative;
+        overflow: hidden;
+        
+        // Animated underline effect
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background: linear-gradient(90deg, $accent-gold, $light-gold);
+          transition: all $transition-normal;
+          transform: translateX(-50%);
+          border-radius: 1px;
+        }
+        
+        // Hover background effect
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(255, 255, 255, 0.1);
+          opacity: 0;
+          transition: all $transition-normal;
+          border-radius: $border-radius-md;
+          transform: scale(0.8);
+        }
+        
+        &:hover {
+          color: $accent-gold;
+          transform: translateY(-2px);
+          
+          &::before {
+            width: 100%;
+          }
+          
+          &::after {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        &.active {
+          color: $accent-gold;
+          font-weight: $font-weight-semibold;
+          
+          &::before {
+            width: 100%;
+            background: $accent-gold;
+          }
+          
+          &::after {
+            opacity: 1;
+            transform: scale(1);
+            background: rgba(255, 215, 0, 0.15);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animation keyframes for navigation items
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// Background animation keyframes
+@keyframes backgroundFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+    opacity: 0.4;
+  }
+}
+
+@keyframes backgroundShimmer {
+  0%, 100% {
+    transform: translateX(-100%) skewX(-15deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) skewX(-15deg);
+    opacity: 0;
+  }
+}
+
+@keyframes businessFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(10px, -5px) scale(1.02);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-5px, 10px) scale(0.98);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translate(5px, 5px) scale(1.01);
+    opacity: 0.9;
+  }
+}
+
+// Apply staggered animations to navigation items
+.navList li {
+  animation: slideInFromLeft 0.6s ease-out;
+  animation-fill-mode: both;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.4s; }
+  &:nth-child(5) { animation-delay: 0.5s; }
+  &:nth-child(6) { animation-delay: 0.6s; }
+  &:nth-child(7) { animation-delay: 0.7s; }
+  &:nth-child(8) { animation-delay: 0.8s; }
+}
+
+// Header entrance animation
+.header {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+// Responsive design with enhanced mobile experience
+@media (max-width: $breakpoint-lg) {
+  .container {
+    padding: 0 $spacing-lg;
+  }
+  
+  .navigation {
+    .navList {
+      gap: $spacing-md;
+      
+      li a {
+        font-size: $font-size-xs;
+        padding: $spacing-xs $spacing-sm;
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .container {
+    flex-direction: column;
+    gap: $spacing-md;
+    padding: $spacing-md;
+  }
+
+  .navigation {
+    margin-left: 0;
+    
+    .navList {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: $spacing-sm;
+      
+      li a {
+        font-size: $font-size-sm;
+        padding: $spacing-sm $spacing-md;
+      }
+    }
+  }
+  
+  .logo {
+    .logoImage {
+      height: 45px;
+    }
+  }
+}
+
+// Mobile menu button
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-sm;
+  z-index: 1001;
+  
+  @media (max-width: $breakpoint-md) {
+    display: block;
+  }
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  width: 24px;
+  height: 18px;
+  position: relative;
+  
+  span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: white;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+    
+    &:nth-child(1) {
+      margin-bottom: 4px;
+    }
+    
+    &:nth-child(2) {
+      margin-bottom: 4px;
+    }
+  }
+  
+  &.hamburgerOpen {
+    span {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .container {
+    padding: $spacing-md;
+    position: relative;
+  }
+  
+  .navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.98) 0%, rgba(42, 82, 152, 0.98) 100%);
+    backdrop-filter: blur(10px);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    padding-top: 80px;
+    
+    &.navigationOpen {
+      transform: translateX(0);
+    }
+    
+    .navList {
+      flex-direction: column;
+      text-align: center;
+      gap: $spacing-md;
+      padding: $spacing-xl;
+      height: 100%;
+      justify-content: flex-start;
+      
+      li {
+        width: 100%;
+        
+        a {
+          display: block;
+          width: 100%;
+          padding: $spacing-lg;
+          font-size: $font-size-lg;
+          border-radius: $border-radius-lg;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.3s ease;
+          
+          &:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+          }
+        }
+      }
+    }
+  }
+  
+  .logo {
+    .logoImage {
+      height: 45px;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .container {
+    padding: $spacing-sm;
+  }
+  
+  .navigation {
+    .navList {
+      padding: $spacing-lg;
+      gap: $spacing-sm;
+      
+      li a {
+        padding: $spacing-md;
+        font-size: $font-size-base;
+      }
+    }
+  }
+  
+  .logo {
+    .logoImage {
+      height: 40px;
+    }
+  }
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  .header,
+  .navList li,
+  .logoImage,
+  .navigation li a {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+// Focus states for accessibility
+.navigation li a:focus {
+  outline: 2px solid $accent-gold;
+  outline-offset: 2px;
+  border-radius: $border-radius-md;
+}
+

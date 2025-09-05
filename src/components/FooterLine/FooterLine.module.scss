@@ -1,0 +1,253 @@
+@import '../../styles/variables.scss';
+
+.footerLine {
+  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      linear-gradient(45deg, rgba(76, 175, 80, 0.1) 0%, rgba(102, 187, 106, 0.05) 50%, rgba(76, 175, 80, 0.08) 100%),
+      radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+    z-index: 0;
+  }
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  
+  .logo {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.1);
+      filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+    }
+  }
+}
+
+.socialSection {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  
+  .socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px) scale(1.1);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+    
+    &:active {
+      transform: translateY(0) scale(1.05);
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+.bigB {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .bLetter {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-family: 'Arial Black', Arial, sans-serif;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    
+    &:hover {
+      transform: scale(1.1) rotate(5deg);
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    }
+  }
+}
+
+.mainLogo {
+  display: flex;
+  align-items: center;
+  
+  .mainLogoImg {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.1);
+      filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 1200px) {
+  .container {
+    gap: 1.5rem;
+  }
+  
+  .logoSection {
+    gap: 1.5rem;
+    
+    .logo {
+      height: 50px;
+    }
+  }
+  
+  .socialSection {
+    gap: 1rem;
+    
+    .socialLink {
+      width: 40px;
+      height: 40px;
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+  
+  .bigB .bLetter {
+    font-size: 2.2rem;
+  }
+  
+  .mainLogo .mainLogoImg {
+    height: 45px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerLine {
+    padding: 1.5rem 0;
+  }
+  
+  .container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .logoSection {
+    order: 1;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    
+    .logo {
+      height: 40px;
+    }
+  }
+  
+  .socialSection {
+    order: 2;
+    gap: 0.8rem;
+    
+    .socialLink {
+      width: 36px;
+      height: 36px;
+      
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
+  
+  .bigB {
+    order: 3;
+    
+    .bLetter {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .mainLogo {
+    order: 4;
+    
+    .mainLogoImg {
+      height: 40px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .logoSection {
+    .logo {
+      height: 35px;
+    }
+  }
+  
+  .socialSection {
+    .socialLink {
+      width: 32px;
+      height: 32px;
+      
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+  
+  .bigB .bLetter {
+    font-size: 1.5rem;
+  }
+  
+  .mainLogo .mainLogoImg {
+    height: 35px;
+  }
+}

@@ -1,0 +1,511 @@
+@import '../../styles/variables.scss';
+
+.contactInfoSection {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: relative;
+  overflow: hidden;
+
+  // Diagonal stripes in very light green
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      linear-gradient(45deg, rgba(76, 175, 80, 0.12) 25%, transparent 25%, transparent 75%, rgba(76, 175, 80, 0.12) 75%);
+    background-size: 25px 25px;
+    z-index: 0;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.contactCard {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.1),
+    0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.1s ease-out;
+  cursor: pointer;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px) scale(0.95) perspective(1000px);
+  border: 4px solid #4caf50;
+  transform-style: preserve-3d;
+  height: 300px;
+
+  &.animate {
+    animation: cardSlideIn 0.8s ease-out forwards;
+  }
+
+  &:hover {
+    transform: translateY(-10px) scale(1.02) perspective(1000px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 
+      0 20px 40px rgba(0, 0, 0, 0.15),
+      0 8px 25px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(39, 174, 96, 0.1);
+    border-color: #66bb6a;
+
+    .iconContainer {
+      transform: scale(1.1) rotate(5deg) translateZ(20px);
+      
+      &.phone {
+        background: linear-gradient(135deg, #27ae60, #2ecc71);
+        box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+      }
+      
+      &.email {
+        background: linear-gradient(135deg, #3498db, #5dade2);
+        box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+      }
+      
+      &.time {
+        background: linear-gradient(135deg, #e74c3c, #ec7063);
+        box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+      }
+    }
+
+    .cardGlow {
+      opacity: 1;
+      transform: scale(1.1) translateZ(10px);
+    }
+
+    .contactTitle {
+      color: #27ae60;
+      transform: translateY(-2px) translateZ(15px);
+    }
+
+    .contactLink,
+    .contactText {
+      transform: translateY(-2px) translateZ(10px);
+    }
+  }
+
+  &.flipped {
+    .cardInner {
+      transform: rotateY(180deg);
+    }
+  }
+  
+  // Green line at the bottom
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    height: 4px;
+    background: linear-gradient(90deg, #4caf50, #66bb6a, #4caf50);
+    border-radius: 2px;
+    z-index: 1;
+  }
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+}
+
+.cardFront,
+.cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardBack {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.cardBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border-radius: 20px;
+  z-index: 1;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  transform-style: preserve-3d;
+}
+
+.iconContainer {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  padding-top: 8px; // Lower the icons within their containers
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
+  svg {
+    color: white;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transition: all 0.3s ease;
+    animation: iconPulse 2s ease-in-out infinite;
+  }
+
+  &.phone {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.2);
+    
+    svg {
+      animation: iconPulse 2s ease-in-out infinite, phoneBounce 2.5s ease-in-out infinite;
+      animation-delay: 0s, 0.3s;
+    }
+  }
+
+  &.email {
+    background: linear-gradient(135deg, #3498db, #5dade2);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.2);
+    
+    svg {
+      animation: iconPulse 2s ease-in-out infinite, emailBounce 3s ease-in-out infinite;
+      animation-delay: 0.2s, 0.6s;
+    }
+  }
+
+  &.time {
+    background: linear-gradient(135deg, #e74c3c, #ec7063);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.2);
+    
+    svg {
+      animation: iconPulse 2s ease-in-out infinite, timeBounce 2s ease-in-out infinite;
+      animation-delay: 0.4s, 0.9s;
+    }
+  }
+}
+
+.contactTitle {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.contactLink {
+  display: inline-block;
+  font-size: 1.1rem;
+  color: #27ae60;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  &:hover {
+    color: #2ecc71;
+    transform: translateY(-2px);
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+.contactText {
+  font-size: 1.1rem;
+  color: #34495e;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  line-height: 1.5;
+}
+
+.cardGlow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(39, 174, 96, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(39, 174, 96, 0.3);
+  transform: scale(0);
+  animation: rippleEffect 0.6s ease-out;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes cardSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes gradientMeshFloat {
+  0%, 100% {
+    background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%, 50% 0%, 50% 100%, 25% 25%, 75% 75%;
+    opacity: 0.7;
+  }
+  25% {
+    background-position: 20% 10%, 80% 10%, 10% 90%, 90% 90%, 40% 10%, 60% 90%, 35% 35%, 65% 65%;
+    opacity: 0.9;
+  }
+  50% {
+    background-position: 10% 20%, 90% 20%, 20% 80%, 80% 80%, 60% 20%, 40% 80%, 45% 45%, 55% 55%;
+    opacity: 0.8;
+  }
+  75% {
+    background-position: 30% 5%, 70% 5%, 5% 95%, 95% 95%, 30% 5%, 70% 95%, 15% 15%, 85% 85%;
+    opacity: 0.85;
+  }
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1.1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes rippleEffect {
+  0% {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes phoneBounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-8px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  75% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes emailBounce {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  20% {
+    transform: translateY(-6px) scale(1.05);
+  }
+  40% {
+    transform: translateY(-10px) scale(1.1);
+  }
+  60% {
+    transform: translateY(-8px) scale(1.05);
+  }
+  80% {
+    transform: translateY(-4px) scale(1.02);
+  }
+}
+
+@keyframes timeBounce {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  60% {
+    transform: translateY(-15px) rotate(-1deg);
+  }
+  80% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .contactInfoSection {
+    padding: 3rem 0;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .contactCard {
+    padding: 2rem 1.5rem;
+  }
+
+  .iconContainer {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 1.2rem;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .contactTitle {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .contactLink,
+  .contactText {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactInfoSection {
+    padding: 2rem 0;
+  }
+
+  .contactCard {
+    padding: 1.5rem 1rem;
+  }
+
+  .iconContainer {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .contactTitle {
+    font-size: 1.1rem;
+  }
+
+  .contactLink,
+  .contactText {
+    font-size: 0.95rem;
+  }
+}
+
+// Animation keyframes for diagonal stripes
+@keyframes stripeShift {
+  0%, 100% {
+    background-position: 0 0, 0 0, 0 0;
+    opacity: 0.8;
+  }
+  25% {
+    background-position: 0 0, 5px 5px, -5px 5px;
+    opacity: 0.6;
+  }
+  50% {
+    background-position: 0 0, 10px 10px, -10px 10px;
+    opacity: 0.9;
+  }
+  75% {
+    background-position: 0 0, 15px 15px, -15px 15px;
+    opacity: 0.7;
+  }
+}
+

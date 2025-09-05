@@ -1,0 +1,182 @@
+@import '../../styles/variables.scss';
+
+.mouseFollowingCard {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  will-change: transform, opacity;
+  
+  // Default card styling
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  min-width: 200px;
+  max-width: 300px;
+  
+  // Performance optimizations
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  
+  // Smooth entrance animation
+  &.visible {
+    opacity: 1;
+  }
+  
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+// Card content styling
+.cardContent {
+  color: #333;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2a5298;
+  }
+  
+  p {
+    margin: 0 0 0.5rem 0;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .highlight {
+    color: #1976d2;
+    font-weight: 600;
+  }
+}
+
+// Different card variants
+.infoCard {
+  background: linear-gradient(135deg, rgba(25, 118, 210, 0.1), rgba(66, 165, 245, 0.05));
+  border: 1px solid rgba(25, 118, 210, 0.2);
+  
+  .cardContent {
+    h3 {
+      color: #1976d2;
+    }
+  }
+}
+
+.successCard {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(129, 199, 132, 0.05));
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  
+  .cardContent {
+    h3 {
+      color: #4caf50;
+    }
+  }
+}
+
+.warningCard {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 193, 7, 0.05));
+  border: 1px solid rgba(255, 152, 0, 0.2);
+  
+  .cardContent {
+    h3 {
+      color: #ff9800;
+    }
+  }
+}
+
+.errorCard {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(239, 83, 80, 0.05));
+  border: 1px solid rgba(244, 67, 54, 0.2);
+  
+  .cardContent {
+    h3 {
+      color: #f44336;
+    }
+  }
+}
+
+// Animation keyframes
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes cardDisappear {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8) translateY(-10px);
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .mouseFollowingCard {
+    min-width: 150px;
+    max-width: 250px;
+    padding: 1rem;
+    
+    .cardContent {
+      font-size: 0.8rem;
+      
+      h3 {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .mouseFollowingCard {
+    min-width: 120px;
+    max-width: 200px;
+    padding: 0.8rem;
+    
+    .cardContent {
+      font-size: 0.75rem;
+      
+      h3 {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// Performance optimizations
+.mouseFollowingCard {
+  // Use GPU acceleration
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  
+  // Optimize for smooth animations
+  will-change: transform, opacity;
+  
+  // Reduce motion for users who prefer it
+  @media (prefers-reduced-motion: reduce) {
+    transition: opacity 0.2s ease;
+    transform: none !important;
+  }
+}

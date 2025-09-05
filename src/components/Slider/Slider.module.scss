@@ -283,12 +283,7 @@
     min-height: 400px;
     
     .verticalDivider {
-      width: 80%;
-      height: 3px;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background: linear-gradient(to right, #4caf50, #66bb6a, #4caf50);
+      display: none;
     }
   }
 
@@ -341,8 +336,7 @@
     gap: 1rem;
     
     .verticalDivider {
-      width: 70%;
-      height: 2px;
+      display: none;
     }
   }
 

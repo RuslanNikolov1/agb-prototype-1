@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/agb-prototype-1/static/css/main.4bd796aa.css",
+    "main.js": "/agb-prototype-1/static/js/main.3a51f8f1.js",
+    "index.html": "/agb-prototype-1/index.html",
+    "main.4bd796aa.css.map": "/agb-prototype-1/static/css/main.4bd796aa.css.map",
+    "main.3a51f8f1.js.map": "/agb-prototype-1/static/js/main.3a51f8f1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4bd796aa.css",
+    "static/js/main.3a51f8f1.js"
+  ]
+}
